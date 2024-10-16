@@ -1,6 +1,3 @@
-// TODO
-// Go to office hours and ask if prefix is just the first few words or any common words. For example what if its 'apples' and 'apple', is that a match for the word apple? 
-
 import java.util.Scanner;
 
 public class Exercise4{
