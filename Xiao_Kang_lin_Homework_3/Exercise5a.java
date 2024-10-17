@@ -1,6 +1,3 @@
-// TODO 
-// Go to office hours and ask if decimal numbers are integers or doubles. The examples shown on the hw doc uses int. 
-
 import java.util.Scanner;
 
 public class Exercise5a{

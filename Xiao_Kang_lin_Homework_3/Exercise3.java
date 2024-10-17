@@ -1,6 +1,3 @@
-// TODO
-// Ask if I am to print the numbers too or just the characters. 
-
 public class Exercise3{
 	public static void main(String[]args){
         int n = 65;
