@@ -7,11 +7,11 @@ public class prime_number_finder{
 		int b = 0;
 		int big = 0;
 		int small = 0;
-		System.out.println("What is the first interger?");
+		System.out.println("What is the first integer?");
 		a = input.nextInt();
-		System.out.println("What is the second interger?");
+		System.out.println("What is the second integer?");
 		b = input.nextInt();
-		System.out.println("The prime numbers between the two intergers are:");
+		System.out.println("The prime numbers between the two integers are:");
 		if (a>=b){
 			big = a;
 			small = b;
