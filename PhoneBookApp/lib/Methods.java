@@ -2,10 +2,11 @@
 Its good pratice to keep methods that you can repeatly use in a seperate file which all your code can use.
 You can access this here by doing "import PhoneBookApp.Methods;" and then calling the function like normal like here:"Methods.BinarySearch(array, 0, 0, 1)"
 */
-package PhoneBookApp;
+package lib;
 import java.util.*;
 
 public class Methods{
+    
 /*
 Instead of doing i++, I have this just looping until it finds the output.
 Do note that this is bad pratice if the dataset is huge, but overall this should be the default way of making binary search if the dataset isnt big.
@@ -97,6 +98,6 @@ When in doubt, Id say use this due to its time efficiency.
         }
     }
 
-    
+
 
 }
