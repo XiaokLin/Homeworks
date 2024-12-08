@@ -112,7 +112,7 @@ When in doubt, Id say use this due to its time efficiency.
         while (username == null) {
                 System.out.println("What would you like to input as your username?");
                 String new_username = input.nextLine();
-                System.out.println("Would you like " + username + " to be your username?");
+                System.out.println("Would you like " + new_username + " to be your username?");
                 System.out.println("Yes or No?");
                 String temp_input1 = input.nextLine();
                 if (Clean_String(temp_input1).equals("yes")){
@@ -133,7 +133,7 @@ When in doubt, Id say use this due to its time efficiency.
         while (password == null){
                 System.out.println("What would you like to input as your password?");
                 String new_password = input.nextLine();
-                System.out.println("Would you like " + password + " to be your password?");
+                System.out.println("Would you like " + new_password + " to be your password?");
                 System.out.println("Yes or No?");
                 String temp_input1 = input.nextLine();
                 if (Clean_String(temp_input1).equals("yes")){
@@ -149,20 +149,26 @@ When in doubt, Id say use this due to its time efficiency.
     }
 
 // sets the login
-    public static void login(String actual_username, String actual_password){
-        for (int i=0; i<3; i++){
+    public void login(String actual_username, String actual_password){
+        for (int i=0; i<4; i++){
             System.out.println("What is your username?");
             String username_input = input.nextLine();
             System.out.println("What is your password?");
             String password_input = input.nextLine();
-            if (username.equals(username_input) && password.equals(password_input)){
+            if (actual_username.equals(username_input) && actual_password.equals(password_input)){
                 break;
             }
             else {
-                System.out.println("Wrong username or password.");
-                System.out.println("You have " + i-1 + " tries left before the database gets deleted.");
+                int remaining_tries = 3-i;
+                if (remaining_tries > 0){
+                    System.out.println("Wrong username or password.");
+                    System.out.println("You have " + remaining_tries + " tries left before the database gets deleted.");
+                } else {
+                    System.out.println("Wrong username or password.");
+                    System.out.println("You have used up all your attemps. The database will be deleted.");
+                    System.exit(0);
+                }
             }
         }
-        System.exit();
     }
 }

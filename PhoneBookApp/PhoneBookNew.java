@@ -4,14 +4,16 @@ import java.util.*;
 public class PhoneBookNew {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        String username = null;
+        String password = null;
         int first_use = 0;
         Methods methods = new Methods();
         if (first_use == 0){
-            methods.Set_Username();
-            methods.Set_Password();
+            username = methods.Set_Username();
+            password = methods.Set_Password();
         }
 
-        methods.login();
+        methods.login(username, password);
         
         System.out.println("");
         UserInterface userInterface = new UserInterface();
