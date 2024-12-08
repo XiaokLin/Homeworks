@@ -98,6 +98,54 @@ When in doubt, Id say use this due to its time efficiency.
         }
     }
 
+//Removes all non letters and numbers like spaces and symbols and makes everything lowercase. 
+    public static String Clean_String(String input) {
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+        return input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+    }
 
+// Sets and Changes Username 
+    public static String Set_Username(){
+        String username = null;
+        while (username == null) {
+                System.out.println("What would you like to input as your username?");
+                new_username = input.nextLine();
+                System.out.println("Would you like " + username + " to be your username?");
+                System.out.println("Yes or No?");
+                String temp_input1 = input.nextLine();
+                if (Clean_String(temp_input1).equals("yes")){
+                    username = new_username;
+                    System.out.println("Your username has been set.");
+                }  else if (Clean_String(temp_input1).equals("no")){
+                    System.out.println("Your password has been set.");
+                }  else {
+                    System.out.println("Please only input yes or no.");
+                }
+        }
+        return username;
+    }
+
+//Sets and Changes Password
+    public static String Set_Password(){
+        String password = null;
+        while (password == null){
+                System.out.println("What would you like to input as your password?");
+                new_password = input.nextLine();
+                System.out.println("Would you like " + password + " to be your password?");
+                System.out.println("Yes or No?");
+                String temp_input1 = input.nextLine();
+                if (Clean_String(temp_input1).equals("yes")){
+                    password = new_password;
+                    System.out.println("Your password has been set.");
+                }  else if (Clean_String(temp_input1).equals("no")){
+                    System.out.println("Lets try again.");
+                }  else {
+                    System.out.println("Please only input yes or no.");
+                }
+        }
+        return password;
+    }
 
 }
