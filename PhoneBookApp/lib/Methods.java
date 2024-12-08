@@ -6,7 +6,7 @@ package lib;
 import java.util.*;
 
 public class Methods{
-    
+    Scanner input = new Scanner(System.in);
 /*
 Instead of doing i++, I have this just looping until it finds the output.
 Do note that this is bad pratice if the dataset is huge, but overall this should be the default way of making binary search if the dataset isnt big.
@@ -107,11 +107,11 @@ When in doubt, Id say use this due to its time efficiency.
     }
 
 // Sets and Changes Username 
-    public static String Set_Username(){
+    public String Set_Username(){
         String username = null;
         while (username == null) {
                 System.out.println("What would you like to input as your username?");
-                new_username = input.nextLine();
+                String new_username = input.nextLine();
                 System.out.println("Would you like " + username + " to be your username?");
                 System.out.println("Yes or No?");
                 String temp_input1 = input.nextLine();
@@ -128,11 +128,11 @@ When in doubt, Id say use this due to its time efficiency.
     }
 
 //Sets and Changes Password
-    public static String Set_Password(){
+    public String Set_Password(){
         String password = null;
         while (password == null){
                 System.out.println("What would you like to input as your password?");
-                new_password = input.nextLine();
+                String new_password = input.nextLine();
                 System.out.println("Would you like " + password + " to be your password?");
                 System.out.println("Yes or No?");
                 String temp_input1 = input.nextLine();

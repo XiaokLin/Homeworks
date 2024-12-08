@@ -5,10 +5,10 @@ public class PhoneBookNew {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int first_use = 0;
-
+        Methods methods = new Methods();
         if (first_use == 0){
-            Methods.Set_Username();
-            Methods.Set_Password();
+            methods.Set_Username();
+            methods.Set_Password();
         }
 
         System.out.println("");
