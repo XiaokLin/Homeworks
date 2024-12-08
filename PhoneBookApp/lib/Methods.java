@@ -171,4 +171,33 @@ When in doubt, Id say use this due to its time efficiency.
             }
         }
     }
+// generates user id based on system time to create an unique userid. 
+// TODO we need to make a number of users variable and array where we store the data. 
+
+    public int Generate_UserID(int Number_Of_Users, int [] array) {
+        int UserID;
+        int Temp_UserID;
+        boolean Unique;
+
+        do {
+            long currentTimeMillis = System.currentTimeMillis();
+            Temp_UserID = (int) (currentTimeMillis % 1000000); 
+            Unique = true;
+            UserID = (Temp_UserID * 13 / 7);
+
+            for (int i = 0; i < Number_Of_Users; i++) {
+                if (array[i] == UserID) {
+                    Unique = false;
+                    break;
+                }
+            }
+        } while (!Unique);
+
+        if (Number_Of_Users < array.length) {
+            array[Number_Of_Users++] = UserID;
+        } else {
+            System.out.println("Storage is full.");
+        }
+        return UserID;
+    }
 }

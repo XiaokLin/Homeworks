@@ -9,9 +9,12 @@ public class PhoneBookNew {
         int first_use = 0;
         Methods methods = new Methods();
         if (first_use == 0){
+            System.out.println("Welcome to the Bari Phone Book Application.");
+            System.out.println("Please register for an admin view and be sure to remember your username and password.");
             username = methods.Set_Username();
             password = methods.Set_Password();
             first_use++;
+            status = "admin"; //update this here to actually update the statuses. 
         }
 
         methods.login(username, password);
