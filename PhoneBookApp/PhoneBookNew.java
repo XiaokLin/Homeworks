@@ -11,6 +11,8 @@ public class PhoneBookNew {
             methods.Set_Password();
         }
 
+        methods.login();
+        
         System.out.println("");
         UserInterface userInterface = new UserInterface();
         System.out.println("User View:");
