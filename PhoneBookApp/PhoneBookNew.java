@@ -11,6 +11,7 @@ public class PhoneBookNew {
         if (first_use == 0){
             username = methods.Set_Username();
             password = methods.Set_Password();
+            first_use++;
         }
 
         methods.login(username, password);
