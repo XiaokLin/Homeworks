@@ -8,6 +8,8 @@ import java.util.*;
 
 public class Methods{
     Scanner input = new Scanner(System.in);
+    private static Map<Integer, PhoneBookEntry> Database = new HashMap<>();
+
 /*
 Standard linear search, nothing to write home about. 
 */
@@ -261,4 +263,87 @@ When in doubt, Id say use this due to its time efficiency.
         String last_name = input.nextLine();
         return last_name;
     }
+
+    public boolean searchForUserID(int unique_id) {
+        int[] userIDs = getAllUserIDs();
+        if (userIDs.length == 0) {
+            return false; 
+        }
+
+        MergeSort(userIDs, 0, userIDs.length - 1);
+
+        if (binarySearchIDs(userIDs, unique_id)) {
+            PhoneBookEntry entry = Database.get(unique_id);
+            if (entry != null) {
+                entry.printBookEntry();
+            } else {
+                System.out.println("No data found for ID: " + unique_id);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean binarySearchIDs(int[] sortedArray, int unique_id) {
+        int left = 0;
+        int right = sortedArray.length - 1;
+        
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (sortedArray[mid] == unique_id) {
+                return true;
+            } else if (sortedArray[mid] < unique_id) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return false;
+    }
+
+    public int[] getAllUserIDs() {
+        int[] userIDs = Database.keySet().stream().mapToInt(Integer::intValue).toArray();
+        return userIDs;
+    }
+
+
+    // sets up the hashmap and only Admins can input a status otherwise its automatically User. 
+    public void add_user_data(int UserCount, boolean Admin) {
+        System.out.println("----------------------------------------------------");
+        Map<String, Object> userdata = new HashMap<>();
+        int ID = random_num();
+        PhoneBookEntry entry = new PhoneBookEntry();
+
+        entry.setID(ID);
+        entry.setFname(first_name());
+        entry.setLname(last_name());
+        entry.setEmail(email());
+        entry.setZipcode(zipcode());
+        entry.setNumber(phone_number());
+        entry.setStatus(status(UserCount, Admin));
+        Database.put(ID, entry);
+
+        System.out.println("Your Data has been collected under the unique ID: " + ID);
+    }
+
+    public void printFirstTenEntries() {
+        // int count = 0;
+        for (Map.Entry<Integer, PhoneBookEntry> outerEntry : Database.entrySet()) {
+            System.out.println("ID: " + outerEntry.getKey());
+            PhoneBookEntry entry = outerEntry.getValue();
+            entry.printBookEntry();
+            System.out.println();
+
+        /* 
+Realistically, we should not print every entry and print like 10 and then have a next page and prev page and exit option. 
+            count++;
+            if (count == 10) {
+                break; 
+            }
+
+        */
+        }
+    }
+
 }
