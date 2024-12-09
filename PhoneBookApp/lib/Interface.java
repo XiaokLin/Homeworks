@@ -12,19 +12,19 @@ public abstract class Interface {
         methods.add_user_data(1, Admin);
     }
 
-    protected void Sort_Entry() {
-        methods.Sort_By_ID();
+    protected void Sort_Entry(boolean Admin) {
+        methods.Sort_By_ID(Admin);
     }
 
-    protected void LinearSearchByPhoneNumber() {
+    protected void LinearSearchByPhoneNumber(boolean Admin) {
         System.out.println("Enter the phone number to search:");
         int phoneNumber = Integer.parseInt(input.nextLine());
-        if(methods.LinearSearchByPhoneNumber(phoneNumber) == 0){
+        if(methods.LinearSearchByPhoneNumber(phoneNumber, Admin) == 0){
             System.out.println("The Phone Number was not found.");
         }
     }
 
-    protected void Print_All_entries() {
-        methods.Print_All_Entries();
+    protected void Print_All_entries(boolean Admin) {
+        methods.Print_All_Entries(Admin);
     }
 }

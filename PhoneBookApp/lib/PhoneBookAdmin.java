@@ -12,9 +12,10 @@ public class PhoneBookAdmin extends Interface {
             System.out.println("2. Edit an entry");
             System.out.println("3. Delete an entry");
             System.out.println("4. Sort by ID");
-            System.out.println("5. Search by phone number");
-            System.out.println("6. Print all entries");
-            System.out.println("7. Exit to main menu");
+            System.out.println("5. Search by ID");
+            System.out.println("6. Search by phone number");
+            System.out.println("7. Print all entries");
+            System.out.println("8. Exit to main menu");
 
             String choice = input.nextLine();
 
@@ -43,19 +44,22 @@ public class PhoneBookAdmin extends Interface {
                     }
                     break;
                 case "4":
-                    Sort_By_ID();
+                    Sort_By_ID(true);
                     break;
                 case "5":
-                    LinearSearchByPhoneNumber();
+                    methods.searchForUserID(true);
                     break;
                 case "6":
-                    Print_All_entries();
+                    LinearSearchByPhoneNumber(true);
                     break;
                 case "7":
+                    Print_All_entries(true);
+                    break;
+                case "8":
                     exit = false;
                     break;
                 default:
-                    System.out.println("Please only input an integer 1-7.");
+                    System.out.println("Please only input an integer 1-8.");
             }
         }
     }

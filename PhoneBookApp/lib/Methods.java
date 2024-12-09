@@ -126,29 +126,37 @@ When in doubt, Id say use this due to its time efficiency.
         return password;
     }
 
-// sets the login
+/*
+sets the login
+if admins can login into user view but a user cannot login to the admin view
+*/
 
-    public void login(String actual_username, String actual_password){
-        for (int i=0; i<4; i++){
+    public boolean login(String actual_username, String actual_password, boolean Admin) {
+        for (int i = 0; i < 4; i++) {
             System.out.println("What is your username?");
             String username_input = input.nextLine();
             System.out.println("What is your password?");
             String password_input = input.nextLine();
-            if (actual_username.equals(username_input) && actual_password.equals(password_input)){
-                return; 
-            }
-            else {
-                int remaining_tries = 3-i;
-                if (remaining_tries > 0){
+
+            if (actual_username.equals(username_input) && actual_password.equals(password_input)) {
+
+                if (Admin && !Database.containsKey(username_input)) {
+                    System.out.println("Access denied.");
+                    return false;
+                }
+                return true; 
+            } else {
+                int remaining_tries = 3 - i;
+                if (remaining_tries > 0) {
                     System.out.println("Wrong username or password.");
-                    System.out.println("You have " + remaining_tries + " tries left before the database gets deleted.");
+                    System.out.println("You have " + remaining_tries + " tries left.");
                 } else {
                     System.out.println("Wrong username or password.");
-                    System.out.println("You have used up all your attempts. The database will be deleted.");
-                    System.exit(0);
+                    System.out.println("You have used up all your attempts.");
                 }
             }
         }
+        return false; 
     }
 
 // generates user id based on system time to create an unique userid. 
@@ -264,7 +272,7 @@ When in doubt, Id say use this due to its time efficiency.
         return last_name;
     }
 
-    public boolean searchForUserID(int unique_id) {
+    public boolean searchForUserID(int unique_id, boolean Admin) {
         int[] userIDs = getAllUserIDs();
         if (userIDs.length == 0) {
             return false; 
@@ -275,7 +283,7 @@ When in doubt, Id say use this due to its time efficiency.
         if (binarySearchIDs(userIDs, unique_id)) {
             PhoneBookEntry entry = Database.get(unique_id);
             if (entry != null) {
-                entry.printBookEntry();
+                entry.printBookEntry(Admin);
             } else {
                 System.out.println("No data found for ID: " + unique_id);
             }
@@ -309,7 +317,7 @@ When in doubt, Id say use this due to its time efficiency.
 
 
     // sets up the hashmap and only Admins can input a status otherwise its automatically User. 
-    public void add_user_data(int UserCount, boolean Admin) {
+    public void add_user_data(int UserCount, boolean Admin, boolean new_user) {
         System.out.println("----------------------------------------------------");
         Map<String, Object> userdata = new HashMap<>();
         int ID = random_num();
@@ -322,17 +330,21 @@ When in doubt, Id say use this due to its time efficiency.
         entry.setZipcode(zipcode());
         entry.setNumber(phone_number());
         entry.setStatus(status(UserCount, Admin));
+        if (new_user){
+            entry.setUsername(Set_Username());
+            entry.Set_Password(Set_Password());
+        }
         Database.put(ID, entry);
 
         System.out.println("Your Data has been collected under the unique ID: " + ID);
     }
 
-    public void Print_All_Entries() {
+    public void Print_All_Entries(boolean Admin) {
         // int count = 0;
         for (Map.Entry<Integer, PhoneBookEntry> outerEntry : Database.entrySet()) {
             System.out.println("ID: " + outerEntry.getKey());
             PhoneBookEntry entry = outerEntry.getValue();
-            entry.printBookEntry();
+            entry.printBookEntry(Admin);
             System.out.println();
 
         /* 
@@ -346,11 +358,11 @@ Realistically, we should not print every entry and print like 10 and then have a
         }
     }
 
-    public int LinearSearchByPhoneNumber(int phoneNumber) {
+    public int LinearSearchByPhoneNumber(int phoneNumber, boolean Admin) {
         for (PhoneBookEntry entry : Database.values()) {
             if (entry.getNumber() == phoneNumber) {
                 System.out.println("Found Entry: ");
-                entry.printBookEntry();
+                entry.printBookEntry(Admin);
                 return 1;
             }
         }
@@ -401,7 +413,7 @@ Realistically, we should not print every entry and print like 10 and then have a
         return 0;
     }
 
-    public void Sort_By_ID() {
+    public void Sort_By_ID(boolean Admin) {
         int[] ids = Database.keySet().stream().mapToInt(Integer::intValue).toArray();
         mergeSort(ids, 0, ids.length - 1);
 
@@ -414,7 +426,7 @@ Realistically, we should not print every entry and print like 10 and then have a
     
         System.out.println("Entries sorted by ascending ID:");
         for (PhoneBookEntry entry : Database.values()) {
-            entry.printBookEntry();
+            entry.printBookEntry(Admin);
         }
     }
 
@@ -425,6 +437,26 @@ Realistically, we should not print every entry and print like 10 and then have a
         } else {
             return 0;
         }
+    }
+
+    public void Register(int UserCount) {
+        System.out.println("Registration");
+        System.out.println("---------------------------------------------")
+        String username = Set_Username();
+
+
+        while (Database.containsKey(username)) {
+            System.out.println("Username already exists. Please choose a different username.");
+            username = Set_Username();
+        }
+
+        String password = Set_Password();
+        if (UserCount = 0) {
+            add_user_data(UserCount, true, true);
+        }   else {
+            add_user_data(UserCount, false, true);
+        }
+        System.out.println("Are you now in the system.");
     }
 
 }

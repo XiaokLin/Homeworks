@@ -16,11 +16,11 @@ public class PhoneBookApplication {
             System.out.println("1. Admin");
             System.out.println("2. User");
             System.out.printlin("3. Exit");
-            String status = input.nextLine();
+            int status = input.nextInt();
 
             if (status.equals("0")) {
                 System.out.println("Bye Bye");
-                methods.saved_data(); // Gotta make a thing where we save and load the data.
+                methods.save_data_onto_json(); // Gotta make a thing where we save and load the data.
                 break;
             }
 

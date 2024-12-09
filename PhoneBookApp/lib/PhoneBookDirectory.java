@@ -13,13 +13,13 @@ public class PhoneBookDirectory {
 
         String username = null;
         String password = null;
-        UserInterface userInterface = new UserInterface();
-        AdminInterface adminInterface = new AdminInterface();
+        NormalUser NormalUser_Interface = new NormalUser();
+        PhoneBookAdmin PhoneBookAdmin_Interface = new PhoneBookAdmin();
 
         System.out.println("Welcome to the Bari Phone Book Application.");
 
         if (UserCount == 0) {
-            System.out.println("Please register for an admin view and remember your username and password.");
+            System.out.println("Please register for an admin view and be sure to remember your username and password.");
             username = methods.Set_Username();
             password = methods.Set_Password();
             methods.login(username, password);
@@ -33,31 +33,41 @@ public class PhoneBookDirectory {
             UserCount++;
         }
 
-        if (UserCount == 1) {
-            System.out.println("Admin View:");
-            adminInterface.user_view();
-            adminInterface.admin_view();
-        } else {
-            System.out.println("User View:");
-            userInterface.user_view();
-        }
+        while (true) {
+                System.out.println("Are you logging in as: ");
+                System.out.println("---------------------------------------------------------")
+                System.out.println("1. Admin");
+                System.out.println("2. User");
+                System.out.println("3. Register");
+                System.out.printlin("4. Exit");
+                int status = input.nextInt();
 
-        methods.Print_All_Entries();
+                if (status.equals("4")) {
+                    System.out.println("Bye Bye");
+                    methods.saved_data(); // Gotta make a thing where we save and load the data.
+                    break;
+                }
 
-        System.out.println("What is the ID number you would like to search for?");
-        String search_id_string = input.nextLine();
-        int search_id;
-        
-        try {
-            search_id = Integer.parseInt(search_id_string);
-            boolean found = methods.searchForUserID(search_id);
-            if (!found) {
-                System.out.println("No data found for that ID.");
+                switch (status) {
+                    case "1":
+                        PhoneBookAdmin_Interface.admin_view();
+                        break;
+                    case "2":
+                        if (UserCount == 1) {
+                            System.out.println("No users registered yet. Please register first.");
+                            methods.register();
+                            UserCount++;
+                        } else {
+                            System.out.println("Adding new phonebook entry:");
+                            methods.add_user_data(UserCount, false, false);
+                        }
+                    case "3":
+                        methods.register();
+                        break;
+                    default:
+                        System.out.println("Please enter only 1, 2, or 0.");
+                }
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a numeric user ID.");
-        }
-
         input.close();
     }
 

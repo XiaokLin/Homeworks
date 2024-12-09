@@ -20,13 +20,13 @@ public class NormalUser {
                     Add_Entry(false);
                     break;
                 case "2":
-                    Sort_By_ID();
+                    Sort_By_ID(false);
                     break;
                 case "3":
-                    LinearSearchByPhoneNumber();
+                    LinearSearchByPhoneNumber(false);
                     break;
                 case "4":
-                    Print_All_entries();
+                    Print_All_entries(false);
                     break;
                 case "5":
                     exit = false;
