@@ -327,7 +327,7 @@ When in doubt, Id say use this due to its time efficiency.
         System.out.println("Your Data has been collected under the unique ID: " + ID);
     }
 
-    public void printFirstTenEntries() {
+    public void Print_All_Entries() {
         // int count = 0;
         for (Map.Entry<Integer, PhoneBookEntry> outerEntry : Database.entrySet()) {
             System.out.println("ID: " + outerEntry.getKey());

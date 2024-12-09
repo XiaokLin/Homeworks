@@ -42,7 +42,7 @@ public class PhoneBookDirectory {
             userInterface.user_view();
         }
 
-        methods.printFirstTenEntries();
+        methods.Print_All_Entries();
 
         System.out.println("What is the ID number you would like to search for?");
         String search_id_string = input.nextLine();
