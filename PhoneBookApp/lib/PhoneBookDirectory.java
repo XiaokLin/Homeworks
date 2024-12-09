@@ -30,7 +30,7 @@ public class PhoneBookDirectory {
 
         while (true) {
                 System.out.println("Are you logging in as: ");
-                System.out.println("---------------------------------------------------------")
+                System.out.println("---------------------------------------------------------");
                 System.out.println("1. Admin");
                 System.out.println("2. User");
                 System.out.println("3. Register");

@@ -31,7 +31,7 @@ public class PhoneBookAdmin extends Interface {
                     if (edit_data = 1) {
                         System.out.println("Your data has been edited properly.");
                     }   else {
-                        System.out.println("No entry was found with the first and last name you entered.")
+                        System.out.println("No entry was found with the first and last name you entered.");
                     }
                     break;
                 case "3":
@@ -40,7 +40,7 @@ public class PhoneBookAdmin extends Interface {
                     if (methods.Delete(ID) == 1){
                         System.out.println("The entry has been deleted.");
                     }   else{
-                        System.out.println("The entry was not found.")
+                        System.out.println("The entry was not found.");
                     }
                     break;
                 case "4":

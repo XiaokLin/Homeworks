@@ -41,7 +41,7 @@ public class Methods{
             System.out.println("An error occurred while loading data: " + e.getMessage());
         }
     }
-    
+
 /*
 Standard linear search, nothing to write home about. 
 */
@@ -408,7 +408,7 @@ Realistically, we should not print every entry and print like 10 and then have a
 
             if (phoneBookEntry.getFname().equalsIgnoreCase(firstName) && phoneBookEntry.getLname().equalsIgnoreCase(lastName)) {
                 System.out.println("For the following options, press enter to skip.");
-                System.out.println("------------------------------------------------------------")
+                System.out.println("------------------------------------------------------------");
                 
                 String new_first_name = first_name();
                 if (!new_first_name.equals("")) {
@@ -472,7 +472,7 @@ Realistically, we should not print every entry and print like 10 and then have a
 
     public void Register(int UserCount) {
         System.out.println("Registration");
-        System.out.println("---------------------------------------------")
+        System.out.println("---------------------------------------------");
         String username = Set_Username();
 
 

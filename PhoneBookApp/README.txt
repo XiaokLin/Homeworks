@@ -2,6 +2,7 @@ Welcome to the Phone Book Application.
 
 Running the code:
 
+    Download the Gson JAR file and add it to your project classpath.
     To get started, you MUST complile MethodsLibrary.java. 
     You MAY not have to compile the other files for this to run but it will NOT run without the library folder compliled. 
 
@@ -26,6 +27,7 @@ Citations:
     https://stackoverflow.com/questions/22937888/write-hashmap-to-json-in-java
     https://studytrails.com/2016/09/12/java-google-json-introduction/
     https://github.com/google/gson
+    https://stackoverflow.com/questions/37975605/how-do-i-download-the-gson-library
 
     The following is for learning Hashmap. 
     https://www.w3schools.com/java/java_hashmap.asp
