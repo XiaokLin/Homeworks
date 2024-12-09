@@ -346,4 +346,85 @@ Realistically, we should not print every entry and print like 10 and then have a
         }
     }
 
+    public int LinearSearchByPhoneNumber(int phoneNumber) {
+        for (PhoneBookEntry entry : Database.values()) {
+            if (entry.getNumber() == phoneNumber) {
+                System.out.println("Found Entry: ");
+                entry.printBookEntry();
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+// This is broken because of the logic I have up above, you cannot press enter to skip for Zipcode and Phone Number. 
+    public int Edit(String firstName, String lastName) {
+
+        for (Map.Entry<Integer, PhoneBookEntry> entry : Database.entrySet()) {
+            PhoneBookEntry phoneBookEntry = entry.getValue();
+
+            if (phoneBookEntry.getFname().equalsIgnoreCase(firstName) && phoneBookEntry.getLname().equalsIgnoreCase(lastName)) {
+                System.out.println("For the following options, press enter to skip.");
+                System.out.println("------------------------------------------------------------")
+                
+                String new_first_name = first_name();
+                if (!new_first_name.equals("")) {
+                    phoneBookEntry.setFname(new_first_name);
+                }
+
+                String new_last_name = last_name();
+                if (!new_last_name.equals("")) {
+                    phoneBookEntry.setLname(new_last_name);
+                }
+
+                String new_email = email();
+                if (!new_email.equals("")) {
+                    phoneBookEntry.setEmail(new_email);
+                }
+
+                
+                int new_zipcode = zipcode();
+                if (!new_zipcode.equals("")) {
+                    phoneBookEntry.setZipcode(new_zipcode);
+                }
+
+                
+                int new_number = phone_number();
+                if (!new_number.equals("")) {
+                    phoneBookEntry.setNumber(new_number);
+                }
+
+                Database.put(entry.getKey(), phoneBookEntry);
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public void Sort_By_ID() {
+        int[] ids = Database.keySet().stream().mapToInt(Integer::intValue).toArray();
+        mergeSort(ids, 0, ids.length - 1);
+
+        Map<Integer, PhoneBookEntry> Sorted_Database = new LinkedHashMap<>();
+        for (int id : ids) {
+            Sorted_Database.put(id, Database.get(id));
+        }
+
+        Database = Sorted_Database;
+    
+        System.out.println("Entries sorted by ascending ID:");
+        for (PhoneBookEntry entry : Database.values()) {
+            entry.printBookEntry();
+        }
+    }
+
+    public int Delete(int ID) {
+        if (Database.containsKey(ID)) {
+            Database.remove(ID);
+            return 1; 
+        } else {
+            return 0;
+        }
+    }
+
 }
