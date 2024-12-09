@@ -67,64 +67,16 @@ public class PhoneBookDirectory {
     public static void add_user_data(int UserCount, boolean Admin) {
         System.out.println("----------------------------------------------------");
         Map<String, Object> userdata = new HashMap<>();
-
-        System.out.println("What is your last name?");
-        String last_name = input.nextLine();
-
-        System.out.println("What is your first name?");
-        String first_name = input.nextLine();
-
-        System.out.println("What is your email?");
-        String email = input.nextLine();
-        
-        int zipcode = -1;
-        while(true){
-            System.out.println("What is your zipcode?");
-            String zipcode_string = input.nextLine(); 
-// Use Regex make sure its 5 digits :)
-            if (!zipcode_string.matches("\\d{5}")) {
-                System.out.println("Please enter a valid 5 digit US zipcode.");
-            } else {
-                zipcode = Integer.parseInt(zipcode_string);
-                break;
-            }
-        }
-
-// Cause some people put phone number data as 123-123-1234 or 123 123 1234 instead of 1231231234. We take the input as a string and parse out all non digits
-        int phone_number = -1;
-        while(true){
-            System.out.println("What is your phone number?");
-            String phone_number_string = input.nextLine();
-            phone_number_string = phone_number_string.replaceAll("\\D+", "");
-            if (!phone_number_string.matches("\\d{10}")) {
-                System.out.println("Please input a valid US phone number which only contains 10 digits without including the area code.");
-            } else {
-                phone_number = Integer.parseInt(phone_number_string);
-                break;
-            }
-        }
-
-        String status;
-        if (UserCount == 0) {
-            status = "admin";
-        } else if (Admin) {
-            System.out.println("Is this going to be an admin or user account? Please enter 'admin' or 'user'.");
-            String statusInput = input.nextLine();
-            status = methods.user_status(statusInput);
-        } else {
-            status = "user";
-        }
-
         int ID = methods.random_num();
-        
         PhoneBookEntry entry = new PhoneBookEntry();
+
         entry.setID(ID);
-        entry.setFname(first_name);
-        entry.setLname(last_name);
-        entry.setEmail(email);
-        entry.setZipcode(zipcode);
-        entry.setNumber(phone_number);
-        entry.setStatus(status);
+        entry.setFname(methods.first_name());
+        entry.setLname(methods.last_name());
+        entry.setEmail(methods.email());
+        entry.setZipcode(methods.zipcode());
+        entry.setNumber(methods.phone_number());
+        entry.setStatus(methods.status(UserCount, Admin));
         Database.put(ID, entry);
 
         System.out.println("Your Data has been collected under the unique ID: " + ID);
