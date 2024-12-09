@@ -2,7 +2,7 @@ import lib.*;
 import java.util.*;
 
 
-public class PhoneBookDirectory {
+public class PhoneBookApplication {
 
     private static Scanner input = new Scanner(System.in);
     private static int UserCount = 0;
@@ -30,7 +30,7 @@ public class PhoneBookDirectory {
 
         while (true) {
                 System.out.println("Are you logging in as: ");
-                System.out.println("---------------------------------------------------------");
+                System.out.println("---------------------------------------------------------")
                 System.out.println("1. Admin");
                 System.out.println("2. User");
                 System.out.println("3. Register");
@@ -50,14 +50,14 @@ public class PhoneBookDirectory {
                     case "2":
                         if (UserCount == 1) {
                             System.out.println("No users registered yet. Please register first.");
-                            methods.register();
+                            methods.Register(UserCount);
                             UserCount++;
                         } else {
                             System.out.println("Adding new phonebook entry:");
                             methods.add_user_data(UserCount, false, false);
                         }
                     case "3":
-                        methods.register();
+                        methods.Register(UserCount);
                         break;
                     default:
                         System.out.println("Please enter only 1, 2, or 0.");

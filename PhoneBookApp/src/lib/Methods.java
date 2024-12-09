@@ -20,7 +20,7 @@ public class Methods{
 // Got saveData and loadData off the stacked overflow, check README
     public void saveData() {
         try (Writer writer = new FileWriter(json_data)) {
-            gson.toJson(userDatabase, writer);
+            gson.toJson(Database, writer);
             System.out.println("Data successfully saved to " + json_data);
         } catch (IOException e) {
             System.out.println("An error occurred while saving data: " + e.getMessage());
@@ -30,9 +30,9 @@ public class Methods{
     public void loadData() {
         try (Reader reader = new FileReader(json_data)) {
             Type type = new TypeToken<Map<String, User>>() {}.getType();
-            userDatabase = gson.fromJson(reader, type);
-            if (userDatabase == null) {
-                userDatabase = new HashMap<>(); // Initialize if the file was empty
+            Database = gson.fromJson(reader, type);
+            if (Database == null) {
+                Database = new HashMap<>(); // Initialize if the file was empty
             }
             System.out.println("Data successfully loaded from " + json_data);
         } catch (FileNotFoundException e) {
@@ -363,7 +363,7 @@ if admins can login into user view but a user cannot login to the admin view
         entry.setStatus(status(UserCount, Admin));
         if (new_user){
             entry.setUsername(Set_Username());
-            entry.Set_Password(Set_Password());
+            entry.setPassword(Set_Password());
         }
         Database.put(ID, entry);
 
@@ -446,7 +446,7 @@ Realistically, we should not print every entry and print like 10 and then have a
 
     public void Sort_By_ID(boolean Admin) {
         int[] ids = Database.keySet().stream().mapToInt(Integer::intValue).toArray();
-        mergeSort(ids, 0, ids.length - 1);
+        MergeSort(ids, 0, ids.length - 1);
 
         Map<Integer, PhoneBookEntry> Sorted_Database = new LinkedHashMap<>();
         for (int id : ids) {
@@ -482,7 +482,7 @@ Realistically, we should not print every entry and print like 10 and then have a
         }
 
         String password = Set_Password();
-        if (UserCount = 0) {
+        if (UserCount == 0) {
             add_user_data(UserCount, true, true);
         }   else {
             add_user_data(UserCount, false, true);

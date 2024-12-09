@@ -5,7 +5,7 @@ public class PhoneBook {
 
 	public static void main(String[] args) {
 
-		 PhoneBookEntry entry1 = new PhoneBookEntry(5, "John", "Smith", "jsmith@gmail.edu", 20037, 2023334444, "Admin");
+		 PhoneBookEntry entry1 = new PhoneBookEntry(5, "John", "Smith", "jsmith@gmail.edu", 20037, 2023334444, "Admin", "username", "password");
 
 
 	        // Second Object: James, 202344344
@@ -33,7 +33,7 @@ public class PhoneBook {
 
 	        // This will print all details of entry1
 
-	        entry1.printBookEntry();
+	        entry1.printBookEntry(false);
 
 
 
@@ -49,7 +49,7 @@ public class PhoneBook {
 
 	        // Print out James's entry
 
-	        entry2.printBookEntry();
+	        entry2.printBookEntry(false);
 
 	}
 }

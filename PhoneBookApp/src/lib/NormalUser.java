@@ -1,6 +1,6 @@
 package lib;
 
-public class NormalUser {
+public class NormalUser extends Interface {
 
     public void menu() {
         boolean exit = true;
@@ -20,7 +20,7 @@ public class NormalUser {
                     Add_Entry(false);
                     break;
                 case "2":
-                    Sort_By_ID(false);
+                    Sort_Entry(false);
                     break;
                 case "3":
                     LinearSearchByPhoneNumber(false);

@@ -28,7 +28,7 @@ public class PhoneBookAdmin extends Interface {
                     String fname = input.nextLine();
                     String lname = input.nextLine();
                     int edit_data = methods.Edit(fname, lname);
-                    if (edit_data = 1) {
+                    if (edit_data == 1) {
                         System.out.println("Your data has been edited properly.");
                     }   else {
                         System.out.println("No entry was found with the first and last name you entered.");
@@ -44,10 +44,10 @@ public class PhoneBookAdmin extends Interface {
                     }
                     break;
                 case "4":
-                    Sort_By_ID(true);
+                    Sort_Entry(true);
                     break;
                 case "5":
-                    methods.searchForUserID(true);
+                    methods.searchForUserID(true, true);
                     break;
                 case "6":
                     LinearSearchByPhoneNumber(true);

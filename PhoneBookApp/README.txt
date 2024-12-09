@@ -2,10 +2,11 @@ Welcome to the Phone Book Application.
 
 Running the code:
 
-    Download the Gson JAR file and add it to your project classpath.
     To get started, you MUST complile MethodsLibrary.java. 
     You MAY not have to compile the other files for this to run but it will NOT run without the library folder compliled. 
 
+    1. type "mvn compile" onto the terminal
+    2. 
     Compile with "javac -d . lib/*.java" and what ever else you want to compile. 
 
 User Guide:
@@ -31,3 +32,7 @@ Citations:
 
     The following is for learning Hashmap. 
     https://www.w3schools.com/java/java_hashmap.asp
+
+    Documentation for Maven. Could not run the code using Json without this. 
+    https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+    https://mvnrepository.com/artifact/com.google.code.gson/gson
