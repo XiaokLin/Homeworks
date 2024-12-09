@@ -5,7 +5,7 @@ import java.util.*;
 public class PhoneBookDirectory {
 
     private static Scanner input = new Scanner(System.in);
-    private static Map<Integer, Map<String, Object>> Database = new HashMap<>();
+    private static Map<Integer, PhoneBookEntry> Database = new HashMap<>();
     private static int UserCount = 0;
     private static Methods methods = new Methods();
 
@@ -44,7 +44,9 @@ public class PhoneBookDirectory {
         }
 
         printFirstTenEntries();
+
         System.out.println("What is the ID number you would like to search for?");
+
         int search_id = input.nextInt();
         try {
             boolean found = searchForUserID(search_id);
@@ -59,69 +61,76 @@ public class PhoneBookDirectory {
     }
 
 
-
+// sets up the hashmap and only Admins can input a status otherwise its automatically User. 
     public static void add_user_data(int UserCount, boolean Admin) {
-
+        System.out.println("----------------------------------------------------");
         Map<String, Object> userdata = new HashMap<>();
 
         System.out.println("What is your last name?");
         String last_name = input.nextLine();
-        userdata.put("last_name", last_name);
 
         System.out.println("What is your first name?");
         String first_name = input.nextLine();
-        userdata.put("first_name", first_name);
 
         System.out.println("What is your email?");
         String email = input.nextLine();
-        userdata.put("email", email);
 
         System.out.println("What is your zipcode?");
         int zipcode = input.nextInt();
-        if (zipcode == Integer){
-            userdata.put("zipcode", zipcode);
-        } else {
+// uses Regex to make sure its 5 digits :).
+        if (!zipcode.matches("\\d{5}")){
             System.out.println("Please enter a valid 5 digit US zipcode.");
         }
 
-// Cause some people put phone number data as 123-123-1234 instead of 1231231234. We take the input as a string and parse out all non digits
+// Cause some people put phone number data as 123-123-1234 or 123 123 1234 instead of 1231231234. We take the input as a string and parse out all non digits
         System.out.println("What is your phone number?");
         String phone_number_str = input.nextInt();
-        if (phone_number_str.matches("\\d+")){
-            int phone_number = Interger.parseInt(phone_number_str);
-            userdata.put("phone_number", phone_number);
-        }   else {
+        phone_number_str = phone_number_str.replaceAll("\\D+", "");
+        if (!phone_number_str.matches("\\d+")) {
             System.out.println("Please input a valid phone number which only contains digits.");
         }
 
+        String status;
         if (UserCount == 0) {
-            userdata.put("status", "admin");
+            status = "admin";
         } else if (Admin) {
             System.out.println("Is this going to be an admin or user account? Please enter 'admin' or 'user'.");
-            String status = input.nextLine();
-            userdata.put("status", methods.user_status(status));
+            String statusInput = input.nextLine();
+            status = methods.user_status(statusInput);
         } else {
-            userdata.put("status", "user");
+            status = "user";
         }
 
-        Database.put(methods.random_num(), userdata);
-        System.out.println("Your Data has been collected.");
+        int ID = methods.random_num();
+        
+        PhoneBookEntry entry = new PhoneBookEntry();
+        entry.setID(ID);
+        entry.setFname(first_name);
+        entry.setLname(last_name);
+        entry.setEmail(email);
+        entry.setZipcode(zipcode_str);
+        entry.setNumber(phone_number_str);
+        entry.setStatus(status);
+        Database.put(randomID, entry);
+
+        System.out.println("Your Data has been collected under the unique ID: " + ID);
     }
 
     public static void printFirstTenEntries() {
-        int count = 0;
+        // int count = 0;
         for (Map.Entry<Integer, Map<String, Object>> outerEntry : Database.entrySet()) {
             System.out.println("ID: " + outerEntry.getKey());
-            Map<String, Object> userData = outerEntry.getValue();
-            
-            for (Map.Entry<String, Object> innerEntry : userData.entrySet()) {
-                System.out.println("   " + innerEntry.getKey() + ": " + innerEntry.getValue());
-            }
+            entry.printBookEntry();
+            System.out.println();
 
+        /* 
+Realistically, we should not print every entry and print like 10 and then have a next page and prev page and exit option. 
             count++;
             if (count == 10) {
                 break; 
             }
+
+        */
         }
     }
 
@@ -139,12 +148,9 @@ public class PhoneBookDirectory {
         Methods.MergeSort(userIDs, 0, userIDs.length - 1);
 
         if (binarySearchIDs(userIDs, unique_id)) {
-            Map<String, Object> userData = Database.get(unique_id);
+            PhoneBookEntry entry = Database.get(unique_id);
             if (userData != null) {
-                System.out.println("ID: " + unique_id);
-                for (Map.Entry<String, Object> entry : userData.entrySet()) {
-                    System.out.println(entry.getKey() + ": " + entry.getValue());
-                }
+                entry.printBookEntry();
             } else {
                 System.out.println("No data found for ID: " + unique_id);
             }
