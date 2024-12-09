@@ -6,8 +6,8 @@ public class PhoneBookEntry{
 	private String fname;
 	private String lname;
 	private String email;
-	private String zipcode;
-	private String number;
+	private int zipcode;
+	private int number;
 	private String status;
 
 	//Default constructor 
@@ -16,12 +16,12 @@ public class PhoneBookEntry{
         fname = "";
         lname = "";
         email = "";
-        zipcode = "";
-        number = "";
+        zipcode = -1;
+        number = -1;
 		status = "user";
     }
 	// Constructor that takes in all attributes as arguments
-	public PhoneBookEntry(int i, String f, String l, String e, String z, String n, string s) {
+	public PhoneBookEntry(int i, String f, String l, String e, int z, int n, String s) {
 		ID = i;
 		fname = f;
 		lname = l;
@@ -31,12 +31,12 @@ public class PhoneBookEntry{
 		status = s;
 	}
 	//Constructor that accepts only firstName and phoneNumber
-	public PhoneBookEntry(String f, String n) {
+	public PhoneBookEntry(String f, int n) {
 		ID = -1;
 		fname = f;
 		lname = "";
 		email = "";
-		zipcode = "";
+		zipcode = -1;
 		number = n;
 		status = "user";
 	}
@@ -73,19 +73,19 @@ public class PhoneBookEntry{
 		this.email = email;
 	}
 
-	public String getZipcode() {
+	public int getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(String zipcode) {
+	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
 
-	public String getNumber() {
+	public int getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 
@@ -99,7 +99,7 @@ public class PhoneBookEntry{
 
 	//new Method that prints outt 
 	public void printBookEntry() {
-		System.out.println("ID: " + ID);
+		// System.out.println("ID: " + ID); 
 		System.out.println("First Name: " + this.fname);
 		System.out.println("Last Name: " + this.lname);
 		System.out.println("Email: " + this.email);

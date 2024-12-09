@@ -5,11 +5,11 @@ public class PhoneBook {
 
 	public static void main(String[] args) {
 
-		 PhoneBookEntry entry1 = new PhoneBookEntry(5, "John", "Smith", "jsmith@gmail.edu", "20037", "2023334444");
+		 PhoneBookEntry entry1 = new PhoneBookEntry(5, "John", "Smith", "jsmith@gmail.edu", 20037, 2023334444, "Admin");
 
 
 	        // Second Object: James, 202344344
-	        PhoneBookEntry entry2 = new PhoneBookEntry("James", "202344344");
+	        PhoneBookEntry entry2 = new PhoneBookEntry("James", 202344344);
 
 
 	        // Third Object: Sarah
@@ -25,7 +25,7 @@ public class PhoneBook {
 
 	        // Using the setter on entry1 (John Smith)
 
-	        entry1.setNumber("202555555");
+	        entry1.setNumber(202555555);
 
 
 
@@ -41,7 +41,7 @@ public class PhoneBook {
 
 	        // Get John Smith's zip code and set it to James
 
-	        String johnZip = entry1.getZipcode();
+	        int johnZip = entry1.getZipcode();
 
 	        entry2.setZipcode(johnZip);
 

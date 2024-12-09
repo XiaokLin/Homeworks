@@ -46,9 +46,11 @@ public class PhoneBookDirectory {
         printFirstTenEntries();
 
         System.out.println("What is the ID number you would like to search for?");
-
-        int search_id = input.nextInt();
+        String search_id_string = input.nextLine();
+        int search_id;
+        
         try {
+            search_id = Integer.parseInt(search_id_string);
             boolean found = searchForUserID(search_id);
             if (!found) {
                 System.out.println("No data found for that ID.");
@@ -74,20 +76,32 @@ public class PhoneBookDirectory {
 
         System.out.println("What is your email?");
         String email = input.nextLine();
-
-        System.out.println("What is your zipcode?");
-        int zipcode = input.nextInt();
-// uses Regex to make sure its 5 digits :).
-        if (!zipcode.matches("\\d{5}")){
-            System.out.println("Please enter a valid 5 digit US zipcode.");
+        
+        int zipcode = -1;
+        while(true){
+            System.out.println("What is your zipcode?");
+            String zipcode_string = input.nextLine(); 
+// Use Regex make sure its 5 digits :)
+            if (!zipcode_string.matches("\\d{5}")) {
+                System.out.println("Please enter a valid 5 digit US zipcode.");
+            } else {
+                zipcode = Integer.parseInt(zipcode_string);
+                break;
+            }
         }
 
 // Cause some people put phone number data as 123-123-1234 or 123 123 1234 instead of 1231231234. We take the input as a string and parse out all non digits
-        System.out.println("What is your phone number?");
-        String phone_number_str = input.nextInt();
-        phone_number_str = phone_number_str.replaceAll("\\D+", "");
-        if (!phone_number_str.matches("\\d+")) {
-            System.out.println("Please input a valid phone number which only contains digits.");
+        int phone_number = -1;
+        while(true){
+            System.out.println("What is your phone number?");
+            String phone_number_string = input.nextLine();
+            phone_number_string = phone_number_string.replaceAll("\\D+", "");
+            if (!phone_number_string.matches("\\d{10}")) {
+                System.out.println("Please input a valid US phone number which only contains 10 digits without including the area code.");
+            } else {
+                phone_number = Integer.parseInt(phone_number_string);
+                break;
+            }
         }
 
         String status;
@@ -108,18 +122,19 @@ public class PhoneBookDirectory {
         entry.setFname(first_name);
         entry.setLname(last_name);
         entry.setEmail(email);
-        entry.setZipcode(zipcode_str);
-        entry.setNumber(phone_number_str);
+        entry.setZipcode(zipcode);
+        entry.setNumber(phone_number);
         entry.setStatus(status);
-        Database.put(randomID, entry);
+        Database.put(ID, entry);
 
         System.out.println("Your Data has been collected under the unique ID: " + ID);
     }
 
     public static void printFirstTenEntries() {
         // int count = 0;
-        for (Map.Entry<Integer, Map<String, Object>> outerEntry : Database.entrySet()) {
+        for (Map.Entry<Integer, PhoneBookEntry> outerEntry : Database.entrySet()) {
             System.out.println("ID: " + outerEntry.getKey());
+            PhoneBookEntry entry = outerEntry.getValue();
             entry.printBookEntry();
             System.out.println();
 
@@ -149,7 +164,7 @@ Realistically, we should not print every entry and print like 10 and then have a
 
         if (binarySearchIDs(userIDs, unique_id)) {
             PhoneBookEntry entry = Database.get(unique_id);
-            if (userData != null) {
+            if (entry != null) {
                 entry.printBookEntry();
             } else {
                 System.out.println("No data found for ID: " + unique_id);
