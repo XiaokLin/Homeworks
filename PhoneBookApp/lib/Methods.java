@@ -5,15 +5,46 @@ You can access this here by doing "import PhoneBookApp.Methods;" and then callin
 */
 package lib;
 import java.util.*;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import java.io.*;
+import java.lang.reflect.Type;
 
 public class Methods{
     Scanner input = new Scanner(System.in);
     private static Map<Integer, PhoneBookEntry> Database = new HashMap<>();
+    private static final String json_data = "Database.json";
+    private static Gson gson = new Gson();
 
+
+// Got saveData and loadData off the stacked overflow, check README
+    public void saveData() {
+        try (Writer writer = new FileWriter(json_data)) {
+            gson.toJson(userDatabase, writer);
+            System.out.println("Data successfully saved to " + json_data);
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving data: " + e.getMessage());
+        }
+    }
+
+    public void loadData() {
+        try (Reader reader = new FileReader(json_data)) {
+            Type type = new TypeToken<Map<String, User>>() {}.getType();
+            userDatabase = gson.fromJson(reader, type);
+            if (userDatabase == null) {
+                userDatabase = new HashMap<>(); // Initialize if the file was empty
+            }
+            System.out.println("Data successfully loaded from " + json_data);
+        } catch (FileNotFoundException e) {
+            System.out.println("No existing data file found. Starting fresh.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while loading data: " + e.getMessage());
+        }
+    }
+    
 /*
 Standard linear search, nothing to write home about. 
 */
-
     public static int LinearSearch(int [] array, int input_value){
         for (int i = 0; i < array.length; i++){
             if (input_value == array[i]){

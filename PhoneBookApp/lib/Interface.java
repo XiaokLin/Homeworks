@@ -9,7 +9,7 @@ public abstract class Interface {
     public abstract void menu(); 
 
     protected void Add_Entry(boolean Admin) {
-        methods.add_user_data(1, Admin);
+        methods.add_user_data(1, Admin, false);
     }
 
     protected void Sort_Entry(boolean Admin) {

@@ -18,18 +18,13 @@ public class PhoneBookDirectory {
 
         System.out.println("Welcome to the Bari Phone Book Application.");
 
+        methods.loadData();
+
         if (UserCount == 0) {
-            System.out.println("Please register for an admin view and be sure to remember your username and password.");
+            System.out.println("Please register for an admin view and remember your username and password.");
             username = methods.Set_Username();
             password = methods.Set_Password();
-            methods.login(username, password);
-            System.out.println("Please input your own data.");
-            methods.add_user_data(UserCount, true); 
-            UserCount++; 
-        } else {
-            methods.login(username, password);
-            System.out.println("Please input your own data.");
-            methods.add_user_data(UserCount, true);
+            methods.add_user_data(UserCount, true, true);
             UserCount++;
         }
 
@@ -44,7 +39,7 @@ public class PhoneBookDirectory {
 
                 if (status.equals("4")) {
                     System.out.println("Bye Bye");
-                    methods.saved_data(); // Gotta make a thing where we save and load the data.
+                    methods.saveData();
                     break;
                 }
 

@@ -13,4 +13,19 @@ User Guide:
     There will only be one Admin account. 
     Once done setting up as an Admin, exit and register as an User. 
 
-    
+
+
+
+Citations: 
+
+    All of this below is used for trying to get the hashmap to be saved onto a json file.
+    Alot of time was spent on their github documentation. 
+
+    https://stackoverflow.com/questions/8233542/parse-a-nested-json-using-gson
+    https://stackoverflow.com/questions/11851603/how-to-convert-hashmap-to-json-file
+    https://stackoverflow.com/questions/22937888/write-hashmap-to-json-in-java
+    https://studytrails.com/2016/09/12/java-google-json-introduction/
+    https://github.com/google/gson
+
+    The following is for learning Hashmap. 
+    https://www.w3schools.com/java/java_hashmap.asp
