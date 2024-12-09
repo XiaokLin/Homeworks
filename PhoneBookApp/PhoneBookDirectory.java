@@ -2,11 +2,11 @@ import lib.*;
 import java.util.*;
 
 
-public class PhoneBookNew {
+public class PhoneBookDirectory {
 
     private static Scanner input = new Scanner(System.in);
-    private static Map<Integer, Map<String, String>> Database = new HashMap<>();
-    private static int Number_Of_Users = 0;
+    private static Map<Integer, Map<String, Object>> Database = new HashMap<>();
+    private static int UserCount = 0;
     private static Methods methods = new Methods();
 
 
@@ -19,22 +19,22 @@ public class PhoneBookNew {
 
         System.out.println("Welcome to the Bari Phone Book Application.");
 
-        if (Number_Of_Users == 0) {
+        if (UserCount == 0) {
             System.out.println("Please register for an admin view and remember your username and password.");
             username = methods.Set_Username();
             password = methods.Set_Password();
             methods.login(username, password);
             System.out.println("Please input your own data.");
-            add_user_data(Number_Of_Users, true); 
-            Number_Of_Users++; 
+            add_user_data(UserCount, true); 
+            UserCount++; 
         } else {
             methods.login(username, password);
             System.out.println("Please input your own data.");
-            add_user_data(Number_Of_Users, true);
-            Number_Of_Users++;
+            add_user_data(UserCount, true);
+            UserCount++;
         }
 
-        if (Number_Of_Users == 1) {
+        if (UserCount == 1) {
             System.out.println("Admin View:");
             adminInterface.user_view();
             adminInterface.admin_view();
@@ -60,9 +60,9 @@ public class PhoneBookNew {
 
 
 
-    public static void add_user_data(int Number_Of_Users, boolean Admin) {
+    public static void add_user_data(int UserCount, boolean Admin) {
 
-        Map<String, String> userdata = new HashMap<>();
+        Map<String, Object> userdata = new HashMap<>();
 
         System.out.println("What is your last name?");
         String last_name = input.nextLine();
@@ -77,14 +77,24 @@ public class PhoneBookNew {
         userdata.put("email", email);
 
         System.out.println("What is your zipcode?");
-        String zipcode = input.nextLine();
-        userdata.put("zipcode", zipcode);
+        int zipcode = input.nextInt();
+        if (zipcode == Integer){
+            userdata.put("zipcode", zipcode);
+        } else {
+            System.out.println("Please enter a valid 5 digit US zipcode.");
+        }
 
+// Cause some people put phone number data as 123-123-1234 instead of 1231231234. We take the input as a string and parse out all non digits
         System.out.println("What is your phone number?");
-        String phone_number = input.nextLine();
-        userdata.put("phone_number", phone_number);
+        String phone_number_str = input.nextInt();
+        if (phone_number_str.matches("\\d+")){
+            int phone_number = Interger.parseInt(phone_number_str);
+            userdata.put("phone_number", phone_number);
+        }   else {
+            System.out.println("Please input a valid phone number which only contains digits.");
+        }
 
-        if (Number_Of_Users == 0) {
+        if (UserCount == 0) {
             userdata.put("status", "admin");
         } else if (Admin) {
             System.out.println("Is this going to be an admin or user account? Please enter 'admin' or 'user'.");
@@ -100,11 +110,11 @@ public class PhoneBookNew {
 
     public static void printFirstTenEntries() {
         int count = 0;
-        for (Map.Entry<Integer, Map<String, String>> outerEntry : Database.entrySet()) {
+        for (Map.Entry<Integer, Map<String, Object>> outerEntry : Database.entrySet()) {
             System.out.println("ID: " + outerEntry.getKey());
-            Map<String, String> userData = outerEntry.getValue();
+            Map<String, Object> userData = outerEntry.getValue();
             
-            for (Map.Entry<String, String> innerEntry : userData.entrySet()) {
+            for (Map.Entry<String, Object> innerEntry : userData.entrySet()) {
                 System.out.println("   " + innerEntry.getKey() + ": " + innerEntry.getValue());
             }
 
@@ -129,10 +139,10 @@ public class PhoneBookNew {
         Methods.MergeSort(userIDs, 0, userIDs.length - 1);
 
         if (binarySearchIDs(userIDs, unique_id)) {
-            Map<String, String> userData = Database.get(unique_id);
+            Map<String, Object> userData = Database.get(unique_id);
             if (userData != null) {
                 System.out.println("ID: " + unique_id);
-                for (Map.Entry<String, String> entry : userData.entrySet()) {
+                for (Map.Entry<String, Object> entry : userData.entrySet()) {
                     System.out.println(entry.getKey() + ": " + entry.getValue());
                 }
             } else {
