@@ -2,7 +2,7 @@ package lib;
 
 import java.util.Scanner;
 
-public abstract class Interface {
+public abstract class User {
     protected static Scanner input = new Scanner(System.in);
     protected Methods methods = new Methods();
 
