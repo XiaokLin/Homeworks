@@ -22,6 +22,7 @@ public class PhoneBookAdmin extends Interface {
             switch (choice) {
                 case "1":
                     Add_Entry(true);
+                    methods.load_and_save();
                     break;
                 case "2":
                     System.out.println("Enter the first and last name of the entry to edit:");
@@ -32,7 +33,8 @@ public class PhoneBookAdmin extends Interface {
                         System.out.println("Your data has been edited properly.");
                     }   else {
                         System.out.println("No entry was found with the first and last name you entered.");
-                    }
+                    }   
+                    methods.load_and_save();
                     break;
                 case "3":
                     System.out.println("Enter the ID of the entry to delete:");
@@ -41,7 +43,8 @@ public class PhoneBookAdmin extends Interface {
                         System.out.println("The entry has been deleted.");
                     }   else{
                         System.out.println("The entry was not found.");
-                    }
+                    }  
+                    methods.load_and_save();
                     break;
                 case "4":
                     Sort_Entry(true);
