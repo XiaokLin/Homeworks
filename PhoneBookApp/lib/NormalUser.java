@@ -1,6 +1,6 @@
 package lib;
 
-public class NormalUser extends Interface {
+public class NormalUser extends User {
 
     public void menu() {
         boolean exit = true;
