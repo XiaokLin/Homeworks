@@ -13,7 +13,7 @@ public class PhoneBook {
 
 
 	        // Third Object: Sarah
-	        // For Sarah, we only have a name. We'll use the default constructor and then set her first name.
+	        // For Sarah, we only have a name. So we can use the default constructor and then set their first name using a setter.
 
 	        PhoneBookEntry entry3 = new PhoneBookEntry();
 
