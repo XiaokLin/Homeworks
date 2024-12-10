@@ -22,9 +22,6 @@ public class PhoneBookApplication {
             System.out.println("Please register for an admin view and remember your username and password.");
             methods.add_user_data(UserCount, true, true);
             UserCount++;
-            System.out.println("Admin view created. Device restarting.");
-            methods.saveData();
-            System.exit(0);
         }
 
         while (true) {
@@ -49,7 +46,7 @@ public class PhoneBookApplication {
                         UserCount++;
                     } else {
                         if (methods.login(false)) {
-                            PhoneBookUser_Interface.menu();
+                            NormalUser_Interface.menu();
                         } else {
                             System.out.println("Invalid credentials. Please try again.");
                         }

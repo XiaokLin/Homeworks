@@ -123,7 +123,8 @@ public class PhoneBookEntry{
 
 	//new Method that prints outt 
 	public void printBookEntry(boolean Admin) {
-		// System.out.println("ID: " + ID); 
+		System.out.println();
+		System.out.println("ID: " + ID); 
 		System.out.println("First Name: " + this.fname);
 		System.out.println("Last Name: " + this.lname);
 		System.out.println("Email: " + this.email);
@@ -134,6 +135,8 @@ public class PhoneBookEntry{
 			System.out.println("Username: " + this.username);
 			System.out.println("Password: " + this.password);
 		}
+		System.out.println();
+
 		
 	}
 }

@@ -414,6 +414,9 @@ public class Methods {
         if (new_user) {
             entry.setUsername(Set_Username());
             entry.setPassword(Set_Password());
+        } else {
+            entry.setUsername("");
+            entry.setPassword("");
         }
         Database.put(ID, entry);
 
@@ -423,7 +426,7 @@ public class Methods {
     public void Print_All_Entries(boolean Admin) {
         // int count = 0;
         for (Map.Entry<Integer, PhoneBookEntry> outerEntry : Database.entrySet()) {
-            System.out.println("ID: " + outerEntry.getKey());
+            // System.out.println("ID: " + outerEntry.getKey());
             PhoneBookEntry entry = outerEntry.getValue();
             entry.printBookEntry(Admin);
             System.out.println();
@@ -490,6 +493,8 @@ public class Methods {
 
                 Database.put(entry.getKey(), phoneBookEntry);
                 return 1;
+
+                
             }
         }
         return 0;
