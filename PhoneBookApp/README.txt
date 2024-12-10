@@ -13,7 +13,7 @@ User Guide:
     There will only be one Admin account. 
     Once done setting up as an Admin, exit and register as an User. 
 
-
+We acknowledge that there are some fundamental differences between the method signatures requested in HW7 and our code. This was done purely to accommodate our use of a Hashmap instead of a .txt file
 
 
 Citations: 
