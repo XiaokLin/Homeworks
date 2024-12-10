@@ -496,7 +496,14 @@ public class Methods {
                     phoneBookEntry.setNumber(new_number);
                 }
 
-                Database.put(entry.getKey(), phoneBookEntry);
+                String new_username = Set_Username();
+                    if (!new_username.equals("")) {
+                    phoneBookEntry.setUsername(new_username);
+                }
+                String new_password = Set_Password();
+                    if (!new_username.equals("")) {
+                    phoneBookEntry.setPassword(new_password);
+                }
                 return 1;
 
                 
@@ -522,13 +529,28 @@ public class Methods {
         }
     }
 
-    public int Delete(int ID) {
+    public int Delete_by_ID(int ID) {
         if (Database.containsKey(ID)) {
             Database.remove(ID);
             return 1;
         } else {
             return 0;
         }
+    }
+
+    public int Delete(String firstName, String lastName) {
+        for (Map.Entry<Integer, PhoneBookEntry> entry : Database.entrySet()) {
+            PhoneBookEntry phoneBookEntry = entry.getValue();
+            if (phoneBookEntry.getFname().equalsIgnoreCase(firstName)
+                    && phoneBookEntry.getLname().equalsIgnoreCase(lastName)) {
+                System.out.println("Entry found. Deleting the entry for " 
+                                + firstName + " " + lastName + ".");
+                Database.remove(entry.getKey());
+                return 1; 
+            }
+        }
+        System.out.println("No matching entry found for " + firstName + " " + lastName + ".");
+        return 0; 
     }
 
     public void Register(int UserCount) {
