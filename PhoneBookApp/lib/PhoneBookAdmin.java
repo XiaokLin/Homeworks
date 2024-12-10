@@ -1,6 +1,6 @@
 package lib;
 
-public class PhoneBookAdmin extends Interface {
+public class PhoneBookAdmin extends User {
 
     public void menu() {
 
