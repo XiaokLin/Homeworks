@@ -47,7 +47,7 @@ public class PhoneBookAdmin extends Interface {
                     Sort_Entry(true);
                     break;
                 case "5":
-                    methods.searchForUserID(true, true);
+                    methods.searchForUserID();
                     break;
                 case "6":
                     LinearSearchByPhoneNumber(true);

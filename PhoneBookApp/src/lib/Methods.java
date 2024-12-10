@@ -5,41 +5,20 @@ You can access this here by doing "import PhoneBookApp.Methods;" and then callin
 */
 package lib;
 import java.util.*;
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import java.io.*;
-import java.lang.reflect.Type;
 
 public class Methods{
     Scanner input = new Scanner(System.in);
     private static Map<Integer, PhoneBookEntry> Database = new HashMap<>();
-    private static final String json_data = "Database.json";
-    private static Gson gson = new Gson();
 
 
 // Got saveData and loadData off the stacked overflow, check README
     public void saveData() {
-        try (Writer writer = new FileWriter(json_data)) {
-            gson.toJson(Database, writer);
-            System.out.println("Data successfully saved to " + json_data);
-        } catch (IOException e) {
-            System.out.println("An error occurred while saving data: " + e.getMessage());
-        }
+        
     }
 
     public void loadData() {
-        try (Reader reader = new FileReader(json_data)) {
-            Type type = new TypeToken<Map<String, User>>() {}.getType();
-            Database = gson.fromJson(reader, type);
-            if (Database == null) {
-                Database = new HashMap<>(); // Initialize if the file was empty
-            }
-            System.out.println("Data successfully loaded from " + json_data);
-        } catch (FileNotFoundException e) {
-            System.out.println("No existing data file found. Starting fresh.");
-        } catch (IOException e) {
-            System.out.println("An error occurred while loading data: " + e.getMessage());
-        }
+        
     }
 
 /*
@@ -269,9 +248,9 @@ if admins can login into user view but a user cannot login to the admin view
         }   return status;
     }
 
-    public int phone_number(){
+    public long phone_number(){
 // Cause some people put phone number data as 123-123-1234 or 123 123 1234 instead of 1231231234. We take the input as a string and parse out all non digits
-        int phone_number = -1;
+        long phone_number = -1;
         while(true){
             System.out.println("What is your phone number?");
             String phone_number_string = input.nextLine();
@@ -303,36 +282,34 @@ if admins can login into user view but a user cannot login to the admin view
         return last_name;
     }
 
-    public boolean searchForUserID(int unique_id, boolean Admin) {
-        int[] userIDs = getAllUserIDs();
-        if (userIDs.length == 0) {
-            return false; 
-        }
+    public void searchForUserID() {
+        int[] array = getAllUserIDs();
 
-        MergeSort(userIDs, 0, userIDs.length - 1);
+        MergeSort(array, 0, array.length - 1);
+        System.out.println("Enter the ID you would like to search for:");
+        int id = input.nextInt();
 
-        if (binarySearchIDs(userIDs, unique_id)) {
-            PhoneBookEntry entry = Database.get(unique_id);
+        if (binarySearchIDs(array, id)) {
+            PhoneBookEntry entry = Database.get(id);
             if (entry != null) {
-                entry.printBookEntry(Admin);
-            } else {
-                System.out.println("No data found for ID: " + unique_id);
-            }
-            return true;
-        } else {
-            return false;
+                entry.printBookEntry(true);
+                } 
+            } 
+        else {
+            System.out.println("No data found for ID: " + id);
         }
     }
 
-    public boolean binarySearchIDs(int[] sortedArray, int unique_id) {
+
+    public boolean binarySearchIDs(int[] sortedArray, int id) {
         int left = 0;
         int right = sortedArray.length - 1;
         
         while (left <= right) {
             int mid = (left + right) / 2;
-            if (sortedArray[mid] == unique_id) {
+            if (sortedArray[mid] == id) {
                 return true;
-            } else if (sortedArray[mid] < unique_id) {
+            } else if (sortedArray[mid] < id) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
@@ -432,7 +409,7 @@ Realistically, we should not print every entry and print like 10 and then have a
                 }
 
                 
-                int new_number = phone_number();
+                long new_number = phone_number();
                 if (new_number != -1) {
                     phoneBookEntry.setNumber(new_number);
                 }

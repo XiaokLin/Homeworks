@@ -7,7 +7,7 @@ public class PhoneBookEntry{
 	private String lname;
 	private String email;
 	private int zipcode;
-	private int number;
+	private long number;
 	private String status;
 	private String username;
     private String password;
@@ -25,7 +25,7 @@ public class PhoneBookEntry{
         password = "";
     }
 	// Constructor that takes in all attributes as arguments
-	public PhoneBookEntry(int i, String f, String l, String e, int z, int n, String s, String u, String p) {
+	public PhoneBookEntry(int i, String f, String l, String e, int z, long n, String s, String u, String p) {
 		ID = i;
 		fname = f;
 		lname = l;
@@ -89,11 +89,11 @@ public class PhoneBookEntry{
 		this.zipcode = zipcode;
 	}
 
-	public int getNumber() {
+	public long getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(long number) {
 		this.number = number;
 	}
 
