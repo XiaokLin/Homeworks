@@ -427,13 +427,13 @@ Realistically, we should not print every entry and print like 10 and then have a
 
                 
                 int new_zipcode = zipcode();
-                if (!new_zipcode.equals("")) {
+                if (new_zipcode != -1) {
                     phoneBookEntry.setZipcode(new_zipcode);
                 }
 
                 
                 int new_number = phone_number();
-                if (!new_number.equals("")) {
+                if (new_number != -1) {
                     phoneBookEntry.setNumber(new_number);
                 }
 

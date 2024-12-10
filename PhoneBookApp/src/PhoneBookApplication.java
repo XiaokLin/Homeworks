@@ -30,18 +30,12 @@ public class PhoneBookApplication {
 
         while (true) {
                 System.out.println("Are you logging in as: ");
-                System.out.println("---------------------------------------------------------")
+                System.out.println("---------------------------------------------------------");
                 System.out.println("1. Admin");
                 System.out.println("2. User");
                 System.out.println("3. Register");
                 System.out.printlin("4. Exit");
-                int status = input.nextInt();
-
-                if (status.equals("4")) {
-                    System.out.println("Bye Bye");
-                    methods.saveData();
-                    break;
-                }
+                String status = input.nextLine();
 
                 switch (status) {
                     case "1":
@@ -58,6 +52,10 @@ public class PhoneBookApplication {
                         }
                     case "3":
                         methods.Register(UserCount);
+                        break;
+                    case "4":
+                        System.out.println("Bye Bye");
+                        methods.saveData();
                         break;
                     default:
                         System.out.println("Please enter only 1, 2, or 0.");
