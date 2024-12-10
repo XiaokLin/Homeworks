@@ -1,5 +1,9 @@
 Welcome to the Phone Book Application. 
 
+Notes:
+
+    We did not seperate this into different folders for each exercise because it would have mess up the mapping on the hashmap. 
+
 Running the code:
 
     To get started, you MUST complile MethodsLibrary.java. 
