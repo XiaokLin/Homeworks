@@ -4,8 +4,8 @@ import java.util.*;
 public class PhoneBook {
 
 	public static void main(String[] args) {
-
-		 PhoneBookEntry entry1 = new PhoneBookEntry(5, "John", "Smith", "jsmith@gmail.edu", 20037, 2023334444, "Admin", "username", "password");
+		// For the first entry, we can use the constructor that takes in all attributes as arguments.
+		PhoneBookEntry entry1 = new PhoneBookEntry(5, "John", "Smith", "jsmith@gmail.edu", 20037, 2023334444, "Admin", "username", "password");
 
 
 	        // Second Object: James, 202344344
