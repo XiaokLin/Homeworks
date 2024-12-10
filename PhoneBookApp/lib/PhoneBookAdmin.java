@@ -24,8 +24,9 @@ public class PhoneBookAdmin extends Interface {
                     Add_Entry(true);
                     break;
                 case "2":
-                    System.out.println("Enter the first and last name of the entry to edit:");
+                    System.out.println("Enter the first name of the entry to edit:");
                     String fname = input.nextLine();
+                    System.out.println("Enter the last name of the entry to edit:");
                     String lname = input.nextLine();
                     int edit_data = methods.Edit(fname, lname);
                     if (edit_data == 1) {
