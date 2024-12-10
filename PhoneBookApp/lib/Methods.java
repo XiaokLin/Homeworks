@@ -13,21 +13,29 @@ public class Methods {
     private static Map<Integer, PhoneBookEntry> Database = new HashMap<>();
 
     // Got saveData and loadData off the stacked overflow, check README
-    public void load_and_save() {
-        saveData();
-        loadData();
-    }
 
     public void saveData() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("PhoneBookEntry.txt", true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("PhoneBookEntry.txt"))) {
             for (PhoneBookEntry entry : Database.values()) {
-                writer.println(entry.getID() + "," + entry.getFname() + "," + entry.getLname() + "," + entry.getEmail()
-                        + "," + entry.getZipcode() + "," + entry.getNumber() + "," + entry.getStatus() + ","
-                        + entry.getUsername() + "," + entry.getPassword());
+                writer.println(entry.getID() + "," + entry.getFname() + "," + entry.getLname() + "," + entry.getEmail() +
+                        "," + entry.getZipcode() + "," + entry.getNumber() + "," + entry.getStatus() + "," +
+                        entry.getUsername() + "," + entry.getPassword());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String[] actual_usernames() {
+    return Database.values().stream()
+            .map(PhoneBookEntry::getUsername)
+            .toArray(String[]::new);
+}
+
+    public String[] actual_passwords() {
+        return Database.values().stream()
+                .map(PhoneBookEntry::getPassword)
+                .toArray(String[]::new);
     }
 
     public void loadData() {
@@ -35,6 +43,10 @@ public class Methods {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
+                if (data.length != 9) {
+                    System.out.println("Skipping invalid entry: " + line);
+                    continue; 
+                }
                 PhoneBookEntry entry = new PhoneBookEntry();
                 entry.setID(Integer.parseInt(data[0]));
                 entry.setFname(data[1]);
@@ -50,7 +62,8 @@ public class Methods {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    } /*
+    } 
+    /*
        * Standard linear search, nothing to write home about.
        */
 
@@ -187,18 +200,27 @@ public class Methods {
      * if admins can login into user view but a user cannot login to the admin view
      */
 
-    public boolean login(String actual_username, String actual_password, boolean Admin) {
+    public boolean login(boolean Admin) {
         for (int i = 0; i < 4; i++) {
             System.out.println("What is your username?");
             String username_input = input.nextLine();
             System.out.println("What is your password?");
             String password_input = input.nextLine();
 
-            if (actual_username.equals(username_input) && actual_password.equals(password_input)) {
+            boolean credentialsMatch = false;
+            for (int j = 0; j < actual_usernames().length; j++) {
+                if (actual_usernames()[j].equals(username_input) && actual_passwords()[j].equals(password_input)) {
+                    credentialsMatch = true;
+                    break;
+                }
+            }
 
-                if (Admin && !Database.containsKey(username_input)) {
-                    System.out.println("Access denied.");
-                    return false;
+            if (credentialsMatch) {
+                if (Admin) {
+                    if (!Database.containsKey(username_input)) {
+                        System.out.println("Access denied.");
+                        return false;
+                    }
                 }
                 return true;
             } else {
@@ -502,35 +524,11 @@ public class Methods {
     public void Register(int UserCount) {
         System.out.println("Registration");
         System.out.println("---------------------------------------------");
-        String username = Set_Username();
 
-        while (Database.containsKey(username)) {
-            System.out.println("Username already exists. Please choose a different username.");
-            username = Set_Username();
-        }
+        boolean isAdmin = (UserCount == 0); 
+        add_user_data(UserCount, isAdmin, true); 
 
-        String password = Set_Password();
-        if (UserCount == 0) {
-            add_user_data(UserCount, true, true);
-        } else {
-            add_user_data(UserCount, false, true);
-        }
-        System.out.println("Are you now in the system.");
+        System.out.println("You are now in the system.");
     }
 
-    public boolean Admin(String username, String password) {
-        if (Database.containsKey(Clean_String(username))) {
-            PhoneBookEntry entry = Database.get(username);
-            return entry.getPassword().equals(Clean_String(password)) && entry.getStatus().equals("admin");
-        }
-        return false;
-    }
-
-    public boolean User(String username, String password) {
-        if (Database.containsKey(Clean_String(username))) {
-            PhoneBookEntry entry = Database.get(Clean_String(username));
-            return entry.getPassword().equals(password);
-        }
-        return false;
-    }
 }

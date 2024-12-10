@@ -18,7 +18,6 @@ public class NormalUser extends Interface {
             switch (choice) {
                 case "1":
                     Add_Entry(false);
-                    methods.load_and_save();
                     break;
                 case "2":
                     Sort_Entry(false);

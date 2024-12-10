@@ -16,13 +16,15 @@ public class PhoneBookApplication {
 
         System.out.println("Welcome to the Bari Phone Book Application.");
 
-        methods.load_and_save();
+        methods.loadData();
 
         if (UserCount == 0) {
             System.out.println("Please register for an admin view and remember your username and password.");
             methods.add_user_data(UserCount, true, true);
             UserCount++;
-            methods.load_and_save();
+            System.out.println("Admin view created. Device restarting.");
+            methods.saveData();
+            System.exit(0);
         }
 
         while (true) {
@@ -36,14 +38,8 @@ public class PhoneBookApplication {
 
             switch (status) {
                 case "1":
-                    System.out.println("Enter username:");
-                    username = input.nextLine();
-                    System.out.println("Enter password:");
-                    password = input.nextLine();
-                    if (methods.Admin(username, password)) {
+                    if (methods.login(true)) {
                         PhoneBookAdmin_Interface.menu();
-                    } else {
-                        System.out.println("Invalid credentials. Please try again.");
                     }
                     break;
                 case "2":
@@ -52,13 +48,8 @@ public class PhoneBookApplication {
                         methods.Register(UserCount);
                         UserCount++;
                     } else {
-                        System.out.println("Enter username:");
-                        username = input.nextLine();
-                        System.out.println("Enter password:");
-                        password = input.nextLine();
-                        if (methods.User(username, password)) {
-                            System.out.println("Adding new phonebook entry:");
-                            methods.add_user_data(UserCount, false, false);
+                        if (methods.login(false)) {
+                            PhoneBookUser_Interface.menu();
                         } else {
                             System.out.println("Invalid credentials. Please try again.");
                         }

@@ -5,8 +5,6 @@ Running the code:
     To get started, you MUST complile MethodsLibrary.java. 
     You MAY not have to compile the other files for this to run but it will NOT run without the library folder compliled. 
 
-    1. type "mvn compile" onto the terminal
-    2. 
     Compile with "javac -d . lib/*.java" and what ever else you want to compile. 
 
 User Guide:
