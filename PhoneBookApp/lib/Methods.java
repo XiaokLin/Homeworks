@@ -420,8 +420,8 @@ public class Methods {
             entry.setUsername(Set_Username());
             entry.setPassword(Set_Password());
         } else {
-            entry.setUsername("");
-            entry.setPassword("");
+            entry.setUsername(" ");
+            entry.setPassword(" ");
         }
         Database.put(ID, entry);
 
