@@ -124,17 +124,17 @@ public class PhoneBookEntry{
     }
 
 	//new Method that prints out all the attributes in an entry.
-	//We use boolean Admin since we will only allow printBookEntry for PhoneBookAdmin and not NormalUsers
+	//We use boolean Admin since we will only allow printBookEntry for PhoneBookAdmin and not NormalUsers. This is to avoid a breach of data.
 	public void printBookEntry(boolean Admin) {
 		System.out.println();
 		System.out.println("ID: " + ID); 
 		System.out.println("First Name: " + this.fname);
 		System.out.println("Last Name: " + this.lname);
-		System.out.println("Email: " + this.email);
 		System.out.println("Zipcode: " + this.zipcode);
 		System.out.println("Number: " + this.number);
-		System.out.println("Status: " + this.status);
 		if (Admin) {
+			System.out.println("Email: " + this.email);
+			System.out.println("Status: " + this.status);
 			System.out.println("Username: " + this.username);
 			System.out.println("Password: " + this.password);
 		}
