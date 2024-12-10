@@ -218,7 +218,7 @@ public class Methods {
             if (credentialsMatch) {
                 if (Admin) {
                     PhoneBookEntry entry = Database.values().stream()
-                        .filter(e - > e.getUsername().equals(username.input))
+                        .filter(e -> e.getUsername().equals(username_input))
                         .findFirst()
                         .orElse(null);
                     
