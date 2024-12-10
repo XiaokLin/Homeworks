@@ -217,7 +217,12 @@ public class Methods {
 
             if (credentialsMatch) {
                 if (Admin) {
-                    if (!Database.containsKey(username_input)) {
+                    PhoneBookEntry entry = Database.values().stream()
+                        .filter(e - > e.getUsername().equals(username.input))
+                        .findFirst()
+                        .orElse(null);
+                    
+                    if (entry == null || !entry.getStatus().equalsIgnoreCase("admin")) {
                         System.out.println("Access denied.");
                         return false;
                     }
