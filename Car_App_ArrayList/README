@@ -1,0 +1,11 @@
+Running the code:
+
+    To get started, you MUST complile the Library folder. 
+
+    Compile with "javac -d . lib/*.java" and what ever else you want to compile. 
+
+Notes: 
+
+    This is an Car app where an Array List is used. 
+
+    The code breaks if you input a string for the car price. 
